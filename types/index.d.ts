@@ -20,12 +20,15 @@ declare module 'reqforge' {
   };
 
   // Logger
-  export class Logger {
+  export class DebugLogger {
     constructor(prefix?: string);
+    debugMode: boolean;
     log(message: string): void;
     info(message: string): void;
     warn(message: string): void;
     error(message: string): void;
+    enableDebug(): void;
+    debug(message: string, data?: any): void;
   }
 
   // Auth

@@ -6,7 +6,7 @@
 const config = require('./config');
 const utils = require('./utils');
 const request = require('./request');
-const Logger = require('./logger');
+const DebugLogger = require('./logger');
 const auth = require('./auth');
 const errors = require('./errors');
 const retry = require('./retry');
@@ -17,7 +17,7 @@ module.exports = {
   config,
   utils,
   request,
-  Logger,
+  DebugLogger,
   auth,
   errors,
   retry,

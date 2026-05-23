@@ -4,9 +4,9 @@
  */
 
 const { getBaseURL } = require('./config');
-const Logger = require('./logger');
+const DebugLogger = require('./logger');
 
-const logger = new Logger();
+const logger = new DebugLogger();
 
 /**
  * Send HTTP request
@@ -16,8 +16,7 @@ const logger = new Logger();
  * @returns {Promise<Response>} Fetch response promise
  */
 function sendRequest(endpoint, data, options = {}) {
-  const timeout = options.timeout || 3000;
-  const url = getBaseURL(timeout) + endpoint;
+  const url = getBaseURL(2000) + endpoint;
   logger.log(`Request: ${options.method || 'GET'} ${url}`);
 
   const fetchOptions = {
