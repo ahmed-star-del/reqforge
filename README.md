@@ -11,16 +11,32 @@ npm install reqforge
 ## Quick Start
 
 ```javascript
-const { config, utils } = require('reqforge');
+const { config, utils, request } = require('reqforge');
 
 // Get the base URL for API requests
 const baseURL = config.getBaseURL();
 console.log(baseURL); // https://api.example.com/v1
 
-// Build URL with query parameters
-const url = utils.buildURL('https://api.example.com/v1/users', { page: 1, limit: 10 });
-console.log(url); // https://api.example.com/v1/users?page=1&limit=10
+// Make a GET request
+request.get('/users')
+  .then(res => res.json())
+  .then(data => console.log(data));
+
+// Make a POST request
+request.post('/users', { name: 'John', email: 'john@example.com' })
+  .then(res => res.json())
+  .then(data => console.log(data));
 ```
+
+## Request Methods
+
+The `request` module provides:
+
+- `sendRequest(endpoint, data, options)` - Generic request method
+- `get(endpoint, options)` - GET request
+- `post(endpoint, data, options)` - POST request
+- `put(endpoint, data, options)` - PUT request
+- `del(endpoint, options)` - DELETE request
 
 ## Configuration
 
