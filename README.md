@@ -26,48 +26,17 @@ request.get('/users')
   .then(data => console.log(data));
 ```
 
-## Interceptors
+## Examples
 
-The `interceptor` module provides request and response interception:
+See the [examples](./examples) directory for more usage examples:
 
-- `createRequestInterceptor()` - Create request interceptor manager
-- `createResponseInterceptor()` - Create response interceptor manager
+- [basic.js](./examples/basic.js) - Basic GET and POST requests
+- [auth.js](./examples/auth.js) - Authentication flow
+- [retry.js](./examples/retry.js) - Retry with exponential backoff
 
-### InterceptorManager Methods
+## API Reference
 
-- `use(fulfilled, rejected)` - Add interceptor handler
-- `eject(id)` - Remove interceptor handler
-- `clear()` - Clear all handlers
-
-## Retry Mechanism
-
-The `retry` module provides:
-
-- `withRetry(fn, options)` - Execute function with automatic retry
-- `calculateBackoff(attempt, baseDelay, maxDelay)` - Calculate exponential backoff delay
-
-## Error Handling
-
-The `errors` module provides:
-
-- `ReqForgeError` - Base error class
-- `NetworkError` - Network request failures
-- `TimeoutError` - Request timeout errors
-- `AuthError` - Authentication failures
-- `ValidationError` - Validation errors
-- `ErrorCodes` - Error code constants
-
-## Authentication
-
-The `auth` module provides:
-
-- `login(username, password)` - Login and store token
-- `logout()` - Logout and clear token
-- `getToken()` - Get current auth token
-- `setToken(token)` - Set auth token manually
-- `isAuthenticated()` - Check if authenticated
-
-## Request Methods
+### Request Methods
 
 The `request` module provides:
 
@@ -77,16 +46,7 @@ The `request` module provides:
 - `put(endpoint, data, options)` - PUT request
 - `del(endpoint, options)` - DELETE request
 
-## Logger
-
-The `Logger` class provides:
-
-- `log(message)` - Log a message
-- `info(message)` - Log an info message
-- `warn(message)` - Log a warning message
-- `error(message)` - Log an error message
-
-## Configuration
+### Configuration
 
 The `config` module provides:
 
@@ -95,7 +55,78 @@ The `config` module provides:
 - `defaultConfig` - Default configuration object
 - `mergeConfig(customConfig)` - Merge custom configuration with defaults
 
-## Utilities
+### Logger
+
+The `Logger` class provides:
+
+- `log(message)` - Log a message
+- `info(message)` - Log an info message
+- `warn(message)` - Log a warning message
+- `error(message)` - Log an error message
+
+### Authentication
+
+The `auth` module provides:
+
+- `login(username, password)` - Login and store token
+- `logout()` - Logout and clear token
+- `getToken()` - Get current auth token
+- `setToken(token)` - Set auth token manually
+- `isAuthenticated()` - Check if authenticated
+
+### Error Handling
+
+The `errors` module provides:
+
+- `ReqForgeError` - Base error class
+- `NetworkError` - Network request failures
+- `TimeoutError` - Request timeout errors
+- `AuthError` - Authentication failures
+- `ValidationError` - Validation errors
+- `ErrorCodes` - Error code constants
+- `createErrorFromResponse(response)` - Create error from HTTP response
+
+### Retry Mechanism
+
+The `retry` module provides:
+
+- `withRetry(fn, options)` - Execute function with automatic retry
+- `calculateBackoff(attempt, baseDelay, maxDelay)` - Calculate exponential backoff delay
+
+Options for `withRetry`:
+- `maxRetries` (default: 3) - Maximum number of retry attempts
+- `delay` (default: 1000) - Initial delay in milliseconds
+- `backoff` (default: 2) - Backoff multiplier
+- `shouldRetry(error)` - Function to determine if retry should occur
+
+### Interceptors
+
+The `interceptor` module provides request and response interception:
+
+- `createRequestInterceptor()` - Create request interceptor manager
+- `createResponseInterceptor()` - Create response interceptor manager
+
+#### InterceptorManager Methods
+
+- `use(fulfilled, rejected)` - Add interceptor handler
+- `eject(id)` - Remove interceptor handler
+- `clear()` - Clear all handlers
+- `forEach(data)` - Process data through all handlers
+
+### Caching
+
+The `cache` module provides:
+
+- `MemoryCache` - In-memory cache with TTL support
+  - `get(key)` - Get cached value
+  - `set(key, value, ttl)` - Set cached value with optional TTL
+  - `has(key)` - Check if key exists
+  - `delete(key)` - Remove cached entry
+  - `clear()` - Clear all entries
+  - `size()` - Get cache size
+- `createCacheKey(url, params)` - Generate cache key from URL and params
+
+### Utilities
 
 The `utils` module provides:
 
@@ -106,17 +137,23 @@ The `utils` module provides:
 - `isPlainObject(value)` - Check if value is a plain object
 - `delay(ms)` - Delay execution
 
+## TypeScript Support
+
+TypeScript type definitions are included. Import types:
+
+```typescript
+import { request, config, Logger } from 'reqforge';
+```
+
 ## Testing
 
 ```bash
 npm test
 ```
 
-Run tests with Jest:
+## Changelog
 
-```
-npx jest
-```
+See [CHANGELOG.md](./CHANGELOG.md) for version history.
 
 ## License
 
