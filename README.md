@@ -55,14 +55,16 @@ The `config` module provides:
 - `defaultConfig` - Default configuration object
 - `mergeConfig(customConfig)` - Merge custom configuration with defaults
 
-### Logger
+### DebugLogger
 
-The `Logger` class provides:
+The `DebugLogger` class provides:
 
 - `log(message)` - Log a message
 - `info(message)` - Log an info message
 - `warn(message)` - Log a warning message
 - `error(message)` - Log an error message
+- `debug(message, data)` - Log debug message with optional data (only when debug mode enabled)
+- `enableDebug()` - Enable debug mode
 
 ### Authentication
 

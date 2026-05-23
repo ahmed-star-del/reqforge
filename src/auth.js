@@ -4,6 +4,9 @@
  */
 
 const { sendRequest } = require('./request');
+const DebugLogger = require('./logger');
+
+const logger = new DebugLogger();
 
 let authToken = null;
 
@@ -14,10 +17,12 @@ let authToken = null;
  * @returns {Promise<Object>} Login response with token
  */
 function login(username, password) {
+  logger.debug('Attempting login', { username });
   return sendRequest('/login', { username, password }, { method: 'POST' })
     .then(response => response.json())
     .then(data => {
       authToken = data.token;
+      logger.debug('Login successful');
       return data;
     });
 }

@@ -13,8 +13,8 @@ describe('index', () => {
     expect(reqforge.request).toBeDefined();
   });
 
-  test('should export Logger', () => {
-    expect(reqforge.Logger).toBeDefined();
+  test('should export DebugLogger', () => {
+    expect(reqforge.DebugLogger).toBeDefined();
   });
 
   test('should export auth', () => {
