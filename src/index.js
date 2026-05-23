@@ -9,6 +9,7 @@ const request = require('./request');
 const Logger = require('./logger');
 const auth = require('./auth');
 const errors = require('./errors');
+const retry = require('./retry');
 
 module.exports = {
   config,
@@ -16,5 +17,6 @@ module.exports = {
   request,
   Logger,
   auth,
-  errors
+  errors,
+  retry
 };
