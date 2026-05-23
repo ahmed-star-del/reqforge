@@ -3,4 +3,8 @@
  * @module reqforge
  */
 
-module.exports = {};
+const config = require('./config');
+
+module.exports = {
+  config
+};
