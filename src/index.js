@@ -8,11 +8,13 @@ const utils = require('./utils');
 const request = require('./request');
 const Logger = require('./logger');
 const auth = require('./auth');
+const errors = require('./errors');
 
 module.exports = {
   config,
   utils,
   request,
   Logger,
-  auth
+  auth,
+  errors
 };
