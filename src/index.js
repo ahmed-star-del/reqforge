@@ -11,6 +11,7 @@ const auth = require('./auth');
 const errors = require('./errors');
 const retry = require('./retry');
 const interceptor = require('./interceptor');
+const cache = require('./cache');
 
 module.exports = {
   config,
@@ -20,5 +21,6 @@ module.exports = {
   auth,
   errors,
   retry,
-  interceptor
+  interceptor,
+  cache
 };
