@@ -11,18 +11,31 @@ npm install reqforge
 ## Quick Start
 
 ```javascript
-const { config, request, auth, errors } = require('reqforge');
+const { config, request, retry } = require('reqforge');
 
-// Make a request with error handling
-request.get('/users')
-  .then(res => res.json())
-  .then(data => console.log(data))
-  .catch(err => {
-    if (err instanceof errors.NetworkError) {
-      console.error('Network issue:', err.message);
-    }
-  });
+// Make a request with automatic retry
+retry.withRetry(() => {
+  return request.get('/users')
+    .then(res => res.json());
+}, { maxRetries: 3, delay: 1000 })
+  .then(data => console.log(data));
 ```
+
+## Retry Mechanism
+
+The `retry` module provides:
+
+- `withRetry(fn, options)` - Execute function with automatic retry
+- `calculateBackoff(attempt, baseDelay, maxDelay)` - Calculate exponential backoff delay
+
+### Retry Options
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `maxRetries` | 3 | Maximum number of retry attempts |
+| `delay` | 1000 | Initial delay in milliseconds |
+| `backoff` | 2 | Backoff multiplier |
+| `shouldRetry` | `() => true` | Function to determine if retry should occur |
 
 ## Error Handling
 

@@ -1,6 +1,6 @@
 {
   "name": "reqforge",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A lightweight, flexible HTTP client library with request interception, automatic retry, and logging capabilities, designed for modern web applications.",
   "main": "src/index.js",
   "scripts": {
