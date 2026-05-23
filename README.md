@@ -11,19 +11,15 @@ npm install reqforge
 ## Quick Start
 
 ```javascript
-const { config } = require('reqforge');
+const { config, utils } = require('reqforge');
 
 // Get the base URL for API requests
 const baseURL = config.getBaseURL();
 console.log(baseURL); // https://api.example.com/v1
 
-// Merge custom configuration
-const customConfig = config.mergeConfig({
-  timeout: 10000,
-  headers: {
-    'Authorization': 'Bearer your-token'
-  }
-});
+// Build URL with query parameters
+const url = utils.buildURL('https://api.example.com/v1/users', { page: 1, limit: 10 });
+console.log(url); // https://api.example.com/v1/users?page=1&limit=10
 ```
 
 ## Configuration
@@ -34,6 +30,17 @@ The `config` module provides:
 - `API_VERSION` - Current API version
 - `defaultConfig` - Default configuration object
 - `mergeConfig(customConfig)` - Merge custom configuration with defaults
+
+## Utilities
+
+The `utils` module provides:
+
+- `buildURL(baseURL, params)` - Build URL with query parameters
+- `serializeQuery(obj)` - Serialize object to query string
+- `parseQuery(queryString)` - Parse query string to object
+- `deepMerge(target, source)` - Deep merge objects
+- `isPlainObject(value)` - Check if value is a plain object
+- `delay(ms)` - Delay execution
 
 ## License
 
