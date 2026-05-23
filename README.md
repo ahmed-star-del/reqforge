@@ -11,21 +11,31 @@ npm install reqforge
 ## Quick Start
 
 ```javascript
-const { config, utils, request, Logger } = require('reqforge');
+const { config, utils, request, Logger, auth } = require('reqforge');
 
 // Get the base URL for API requests
 const baseURL = config.getBaseURL();
 console.log(baseURL); // https://api.example.com/v1
 
+// Login
+auth.login('username', 'password')
+  .then(data => console.log('Logged in:', data.token));
+
 // Make a GET request
 request.get('/users')
   .then(res => res.json())
   .then(data => console.log(data));
-
-// Use custom logger
-const logger = new Logger('[MyApp]');
-logger.info('Application started');
 ```
+
+## Authentication
+
+The `auth` module provides:
+
+- `login(username, password)` - Login and store token
+- `logout()` - Logout and clear token
+- `getToken()` - Get current auth token
+- `setToken(token)` - Set auth token manually
+- `isAuthenticated()` - Check if authenticated
 
 ## Request Methods
 
