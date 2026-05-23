@@ -10,6 +10,7 @@ const Logger = require('./logger');
 const auth = require('./auth');
 const errors = require('./errors');
 const retry = require('./retry');
+const interceptor = require('./interceptor');
 
 module.exports = {
   config,
@@ -18,5 +19,6 @@ module.exports = {
   Logger,
   auth,
   errors,
-  retry
+  retry,
+  interceptor
 };

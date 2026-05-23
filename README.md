@@ -11,15 +11,33 @@ npm install reqforge
 ## Quick Start
 
 ```javascript
-const { config, request, retry } = require('reqforge');
+const { request, interceptor } = require('reqforge');
 
-// Make a request with automatic retry
-retry.withRetry(() => {
-  return request.get('/users')
-    .then(res => res.json());
-}, { maxRetries: 3, delay: 1000 })
+// Add a request interceptor
+const reqInterceptor = interceptor.createRequestInterceptor();
+reqInterceptor.use((config) => {
+  console.log('Request:', config.url);
+  return config;
+});
+
+// Make a request
+request.get('/users')
+  .then(res => res.json())
   .then(data => console.log(data));
 ```
+
+## Interceptors
+
+The `interceptor` module provides request and response interception:
+
+- `createRequestInterceptor()` - Create request interceptor manager
+- `createResponseInterceptor()` - Create response interceptor manager
+
+### InterceptorManager Methods
+
+- `use(fulfilled, rejected)` - Add interceptor handler
+- `eject(id)` - Remove interceptor handler
+- `clear()` - Clear all handlers
 
 ## Retry Mechanism
 
@@ -27,15 +45,6 @@ The `retry` module provides:
 
 - `withRetry(fn, options)` - Execute function with automatic retry
 - `calculateBackoff(attempt, baseDelay, maxDelay)` - Calculate exponential backoff delay
-
-### Retry Options
-
-| Option | Default | Description |
-|--------|---------|-------------|
-| `maxRetries` | 3 | Maximum number of retry attempts |
-| `delay` | 1000 | Initial delay in milliseconds |
-| `backoff` | 2 | Backoff multiplier |
-| `shouldRetry` | `() => true` | Function to determine if retry should occur |
 
 ## Error Handling
 
@@ -47,7 +56,6 @@ The `errors` module provides:
 - `AuthError` - Authentication failures
 - `ValidationError` - Validation errors
 - `ErrorCodes` - Error code constants
-- `createErrorFromResponse(response)` - Create error from response
 
 ## Authentication
 
