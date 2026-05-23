@@ -11,21 +11,30 @@ npm install reqforge
 ## Quick Start
 
 ```javascript
-const { config, utils, request, Logger, auth } = require('reqforge');
+const { config, request, auth, errors } = require('reqforge');
 
-// Get the base URL for API requests
-const baseURL = config.getBaseURL();
-console.log(baseURL); // https://api.example.com/v1
-
-// Login
-auth.login('username', 'password')
-  .then(data => console.log('Logged in:', data.token));
-
-// Make a GET request
+// Make a request with error handling
 request.get('/users')
   .then(res => res.json())
-  .then(data => console.log(data));
+  .then(data => console.log(data))
+  .catch(err => {
+    if (err instanceof errors.NetworkError) {
+      console.error('Network issue:', err.message);
+    }
+  });
 ```
+
+## Error Handling
+
+The `errors` module provides:
+
+- `ReqForgeError` - Base error class
+- `NetworkError` - Network request failures
+- `TimeoutError` - Request timeout errors
+- `AuthError` - Authentication failures
+- `ValidationError` - Validation errors
+- `ErrorCodes` - Error code constants
+- `createErrorFromResponse(response)` - Create error from response
 
 ## Authentication
 
