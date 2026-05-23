@@ -11,7 +11,7 @@ npm install reqforge
 ## Quick Start
 
 ```javascript
-const { config, utils, request } = require('reqforge');
+const { config, utils, request, Logger } = require('reqforge');
 
 // Get the base URL for API requests
 const baseURL = config.getBaseURL();
@@ -22,10 +22,9 @@ request.get('/users')
   .then(res => res.json())
   .then(data => console.log(data));
 
-// Make a POST request
-request.post('/users', { name: 'John', email: 'john@example.com' })
-  .then(res => res.json())
-  .then(data => console.log(data));
+// Use custom logger
+const logger = new Logger('[MyApp]');
+logger.info('Application started');
 ```
 
 ## Request Methods
@@ -37,6 +36,15 @@ The `request` module provides:
 - `post(endpoint, data, options)` - POST request
 - `put(endpoint, data, options)` - PUT request
 - `del(endpoint, options)` - DELETE request
+
+## Logger
+
+The `Logger` class provides:
+
+- `log(message)` - Log a message
+- `info(message)` - Log an info message
+- `warn(message)` - Log a warning message
+- `error(message)` - Log an error message
 
 ## Configuration
 
