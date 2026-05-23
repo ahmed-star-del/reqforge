@@ -4,6 +4,9 @@
  */
 
 const { getBaseURL } = require('./config');
+const Logger = require('./logger');
+
+const logger = new Logger();
 
 /**
  * Send HTTP request
@@ -14,6 +17,7 @@ const { getBaseURL } = require('./config');
  */
 function sendRequest(endpoint, data, options = {}) {
   const url = getBaseURL() + endpoint;
+  logger.log(`Request: ${options.method || 'GET'} ${url}`);
 
   const fetchOptions = {
     method: options.method || 'GET',
