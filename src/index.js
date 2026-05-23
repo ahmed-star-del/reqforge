@@ -5,8 +5,10 @@
 
 const config = require('./config');
 const utils = require('./utils');
+const request = require('./request');
 
 module.exports = {
   config,
-  utils
+  utils,
+  request
 };
