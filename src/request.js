@@ -16,7 +16,8 @@ const logger = new Logger();
  * @returns {Promise<Response>} Fetch response promise
  */
 function sendRequest(endpoint, data, options = {}) {
-  const url = getBaseURL() + endpoint;
+  const timeout = options.timeout || 3000;
+  const url = getBaseURL(timeout) + endpoint;
   logger.log(`Request: ${options.method || 'GET'} ${url}`);
 
   const fetchOptions = {

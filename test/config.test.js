@@ -1,4 +1,4 @@
-const { getBaseURL, API_VERSION, defaultConfig, mergeConfig } = require('../src/config');
+const { getBaseURL, API_VERSION, defaultConfig, mergeConfig, DEFAULT_TIMEOUT, MAX_TIMEOUT, validateTimeout } = require('../src/config');
 
 describe('config', () => {
   test('getBaseURL should return URL with API version', () => {
@@ -7,8 +7,33 @@ describe('config', () => {
     expect(url).toContain(API_VERSION);
   });
 
-  test('API_VERSION should be v1', () => {
-    expect(API_VERSION).toBe('v1');
+  test('getBaseURL should accept timeout parameter', () => {
+    const url = getBaseURL(2000);
+    expect(url).toContain('v2');
+  });
+
+  test('API_VERSION should be v2', () => {
+    expect(API_VERSION).toBe('v2');
+  });
+
+  test('DEFAULT_TIMEOUT should be 3000', () => {
+    expect(DEFAULT_TIMEOUT).toBe(3000);
+  });
+
+  test('MAX_TIMEOUT should be 10000', () => {
+    expect(MAX_TIMEOUT).toBe(10000);
+  });
+
+  test('validateTimeout should return timeout if valid', () => {
+    expect(validateTimeout(5000)).toBe(5000);
+  });
+
+  test('validateTimeout should throw if negative', () => {
+    expect(() => validateTimeout(-1)).toThrow();
+  });
+
+  test('validateTimeout should throw if exceeds max', () => {
+    expect(() => validateTimeout(20000)).toThrow();
   });
 
   test('defaultConfig should have required fields', () => {

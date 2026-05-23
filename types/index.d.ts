@@ -1,8 +1,11 @@
 declare module 'reqforge' {
   // Config
   export const config: {
-    getBaseURL(): string;
+    getBaseURL(timeout?: number): string;
     API_VERSION: string;
+    DEFAULT_TIMEOUT: number;
+    MAX_TIMEOUT: number;
+    validateTimeout(timeout: number): number;
     defaultConfig: RequestConfig;
     mergeConfig(customConfig?: Partial<RequestConfig>): RequestConfig;
   };
