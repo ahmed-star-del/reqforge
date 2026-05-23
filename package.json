@@ -1,0 +1,30 @@
+{
+  "name": "reqforge",
+  "version": "0.1.0",
+  "description": "A lightweight, flexible HTTP client library with request interception, automatic retry, and logging capabilities, designed for modern web applications.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "http",
+    "request",
+    "fetch",
+    "api",
+    "client",
+    "lightweight"
+  ],
+  "author": "ahmed-star-del <578095023@qq.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ahmed-star-del/reqforge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ahmed-star-del/reqforge/issues"
+  },
+  "homepage": "https://github.com/ahmed-star-del/reqforge#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
