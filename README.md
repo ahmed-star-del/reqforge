@@ -106,6 +106,18 @@ The `utils` module provides:
 - `isPlainObject(value)` - Check if value is a plain object
 - `delay(ms)` - Delay execution
 
+## Testing
+
+```bash
+npm test
+```
+
+Run tests with Jest:
+
+```
+npx jest
+```
+
 ## License
 
 MIT
